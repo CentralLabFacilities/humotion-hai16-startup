@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function component {
+    ${prefix}/bin/marytts-server.sh 
+}
+
+function clean_component {
+    true
+}
+
+function on_start {
+    true
+}
+
+function on_stop {
+    true
+}
+
+function stop_component {
+    local PIDS=$(all_children $(vdemo_pidFromScreen $1))
+    echo "killing processes $PIDS"
+    kill -SIGINT $PIDS > /dev/null 2>&1
+    sleep .5
+    kill -SIGTERM $PIDS > /dev/null 2>&1
+    for i in {1..50}; do
+        sleep 0.1
+        kill -0 $PIDS > /dev/null 2>&1 || break
+    done
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

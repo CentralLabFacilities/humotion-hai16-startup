@@ -1,0 +1,8 @@
+export VDEMO_demoRoot="@vdemo_demoroot@"
+
+source "$VDEMO_demoRoot/humotion-hai16-env.sh"
+
+source "$VDEMO_demoRoot/humotion-hai16-config.sh"
+
+source "$VDEMO_demoRoot/humotion-hai16-base.sh"
+

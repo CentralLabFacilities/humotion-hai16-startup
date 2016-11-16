@@ -1,0 +1,42 @@
+#!/bin/bash
+
+function component {
+   #export YARP_DATA_DIRS="${prefix}/share/yarp:${prefix}/share/iCub:${prefix}/share/ICUBcontrib"
+   iCubInterface
+}
+
+function clean_component {
+    true
+}
+
+function on_check {
+	true
+}
+
+function on_start {
+    true
+}
+
+function on_stop {
+    true
+}
+
+function stop_component {
+    #special stop handler for icubif:
+    #in order to safely shutdown the icub engines
+    #one has to send one CTRL+C signal. this will invoke
+    #a homing motion and finally disable all motor power
+    #NEVER EVER SHUT DOWN icubif WITHOUT WAITING FOR HOMING & ENGINE SHUTDOWN!
+    local PIDS=$(all_children $(vdemo_pidFromScreen $1))
+    echo "killing processes $PIDS"
+    kill -SIGINT $PIDS > /dev/null 2>&1
+    sleep 20
+    kill -SIGTERM $PIDS > /dev/null 2>&1
+    for i in {1..50}; do
+        sleep 0.1
+        kill -0 $PIDS > /dev/null 2>&1 || break
+    done
+}
+
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

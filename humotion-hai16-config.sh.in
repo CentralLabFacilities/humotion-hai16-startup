@@ -1,0 +1,35 @@
+echo === setup humotion-hai16 vdemo evn
+export VDEMO_demoRoot="@vdemo_demoroot@"
+source "$VDEMO_demoRoot/vdemo_aux_functions.sh"
+export ROS_DISTRO="indigo"
+source "/opt/ros/$ROS_DISTRO/setup.bash"
+
+##############################################################################
+# ENVIRONMENT
+##############################################################################
+
+export prefix="@prefix@"
+export bindir="$prefix/bin"
+export sbindir="$prefix/sbin"
+export sysconfdir="$prefix/etc"
+export VDEMO_root="@vdemo_prefix@/lib/vdemo"
+export VDEMO_componentPath="$VDEMO_demoRoot/component_scripts"
+export PATH="/opt/ros/$ROS_DISTRO/bin/:$bindir:$sbindir:$PATH"
+export PYTHONPATH="$prefix/lib/python2.7/site-packages/:$prefix/lib/python2.7/dist-packages/:$PYTHONPATH"
+
+# ROS
+export ROS_ETC_DIR="/opt/ros/$ROS_DISTRO/etc/ros"
+export ROS_MASTER_URI="http://$ROS_HOST:11311"
+export ROS_PACKAGE_PATH="/opt/ros/$ROS_DISTRO/share:/opt/ros/$ROS_DISTRO/stacks"
+export ROS_ROOT="/opt/ros/$ROS_DISTRO/share/ros"
+
+##############################################################################
+# DEFINE WHERE THE LOGGING DATA GO
+##############################################################################
+# set log permissions #
+install -d /tmp/log/ -m 777
+export VDEMO_logPath=/tmp/log/${USER}
+export VDEMO_watchfile=/tmp/log/VDEMO_${USER}_${$}.log
+export VDEMO_logfile_prefix=${VDEMO_logPath}/VDEMO_component_
+mkdir -m 2777 -p ${VDEMO_logPath}
+

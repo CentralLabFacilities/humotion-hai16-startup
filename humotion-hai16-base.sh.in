@@ -1,0 +1,43 @@
+echo === init vdemo flobidev-roman16-base components
+
+##############################################################################
+# COMPONENT LIST
+##############################################################################
+#   Options:
+#      -w <n> wait n seconds for process to start completely
+#      -c     run check every second during wait and break if component is running
+#      -W <n> set delay an asynchronous check is performed in case -w is not specified
+#      -l     activate initial logging for the component
+#      -x     use own X server for the component
+#      -n     do not include in autostart
+#      -g <s> allow to define a group (string: name of group)
+#      -L <n> component level, affects starting order (numeric: level)
+#      -d <n> detach time, automatically detaches screen after n seconds, or
+#             leaves it open all the time (-1), default is 10 seconds
+#      -t     title of the component / provide unique names for multiple instances on the same host
+#      -v     export variable varname=var to component script
+
+export VDEMO_components="
+roscore,${ROS_HOST},-l -t roscore -w 4 -g services -L 1:
+hlrc_server,${LOCALHOST},-l -t hlrc_server_flobi -w 5 -g flobi -L 3 -v BASE_SCOPE=/flobi -v SOUND_OUTPUT=pulse:
+hlrc_server,${LOCALHOST},-l -t hlrc_server_icub -w 5 -g icub -L 3 -v BASE_SCOPE=/icub -v SOUND_OUTPUT=pulse:
+hlrc_test_gui,${LOCALHOST},-l -L 4 -v BASE_SCOPE=/flobi -n:
+mary_server,${LOCALHOST},-l -t mary_server -w 5 -g flobi -L 1:
+mary_tts_provider,${LOCALHOST},-l -t tts_flobi -w 5 -g flobi -L 2 -v BASE_SCOPE=/flobi -v VOICE=cmu-bdl-hsmm:
+mary_tts_provider,${LOCALHOST},-l -t tts_icub -w 5 -g icub -L 2 -v BASE_SCOPE=/icub -v VOICE=dfki-poppy-hsmm:
+dynamic_reconfigure,${LOCALHOST},-l -t dynamic_reconfigure -w 5 -g services -L 2 -n:
+
+icub:
+yarpserver,${LOCALHOST},-l -t yarpserver -w 5 -g icub -L 0:
+icubinterface,${ICUB_HOST}, -l -t icubinterface -w 5 -g icub -n -L 1:
+icub_faceexpressions,${ICUB_HOST}, -l -t icub_faceexpressions -w 5 -g icub -n -L 2:
+icub_robotmotorgui,${LOCALHOST}, -l -t icub_robotmotorgui -x- w 5 -g icub -n -L 3:
+icub_humotion,${ICUB_HOST},-l -t icub_humotion  -w 5 -g icub -L 4 -n -v ROBOT=icub:
+
+icub_sim:
+icubsim,${LOCALHOST},-l -t icub_sim -x -w 5 -g icubsim -n -L 1:
+icub_humotion,${LOCALHOST},-l -t icub_humotion_sim  -w 5 -g icubsim -L 4 -n -v ROBOT=icubSim:
+icubsim_faceexpressions,${LOCALHOST},-l -t icub_sim_face  -w 5 -n -g icubsim -L 2:
+icubsim_faceexpressions_connect,${LOCALHOST},-l -t icub_sim_face_link  -n -w 5 -g icubsim -L 3:
+"
+
