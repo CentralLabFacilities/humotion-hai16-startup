@@ -31,7 +31,7 @@ icub:
 yarpserver,${LOCALHOST},-l -t yarpserver -w 5 -g icub -L 0:
 icubinterface,${ICUB_HOST}, -l -t icubinterface -w 5 -g icub -n -L 1:
 icub_faceexpressions,${ICUB_HOST}, -l -t icub_faceexpressions -w 5 -g icub -n -L 2:
-icub_robotmotorgui,${LOCALHOST}, -l -t icub_robotmotorgui -x- w 5 -g icub -n -L 3:
+icub_robotmotorgui,${LOCALHOST}, -l -t icub_robotmotorgui -x -w 5 -g icub -n -L 3:
 icub_humotion,${ICUB_HOST},-l -t icub_humotion  -w 5 -g icub -L 4 -n -v ROBOT=icub:
 
 icub_sim:
