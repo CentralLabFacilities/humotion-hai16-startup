@@ -3,8 +3,7 @@
 function component {
     ${prefix}/bin/yarp connect /face/image/out /icubSim/texture/face || exit
     ${prefix}/bin/yarp connect /face/eyelids /icubSim/face/eyelids  || exit
-    sleep
-
+    sleep 999999d
 }
 
 function clean_component {

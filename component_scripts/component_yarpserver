@@ -2,7 +2,7 @@
 
 function component {
    export YARP_DATA_DIRS="${prefix}/share/yarp:${prefix}/share/iCub:${prefix}/share/ICUBcontrib"
-   yarpserver
+   yarpserver --ip $YARP_HOST --socket 10000 --write
 }
 
 function clean_component {

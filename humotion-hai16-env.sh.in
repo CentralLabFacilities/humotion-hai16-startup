@@ -1,5 +1,5 @@
 ### setup env ===
 export LOCALHOST=$(hostname)
-export ICUB_HOST="icub03"
+export ICUB_HOST=$LOCALHOST
 export ROS_HOST=$ICUB_HOST
 
