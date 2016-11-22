@@ -11,7 +11,7 @@ function clean_component {
 }
 
 function on_check {
-	true
+    yarp ping /icubSim/face/eyelids 2>/dev/null  > /dev/null
 }
 
 function on_start {
