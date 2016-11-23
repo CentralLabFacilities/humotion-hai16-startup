@@ -31,6 +31,13 @@ FOREACH(file ${files})
     INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/${demofile}" DESTINATION "etc/vdemo_scripts")
 ENDFOREACH()
 
+FILE(GLOB demos "demo/*.py")
+LIST(REMOVE_ITEM demos "*~")
+INSTALL(FILES ${demos}
+        DESTINATION "share/hai16-demo"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE)
+
+
 FILE(GLOB components "component_scripts/component_*")
 LIST(REMOVE_ITEM components "*~")
 INSTALL(FILES ${components}

@@ -25,6 +25,7 @@ hlrc_test_gui,${LOCALHOST},-l -L 4 -v BASE_SCOPE=/icub -n:
 mary_server,${LOCALHOST},-l -t mary_server -w 5 -g flobi -L 1:
 mary_tts_provider,${LOCALHOST},-l -t tts_icub -w 5 -g icub -L 2 -v BASE_SCOPE=/icub -v VOICE=dfki-poppy-hsmm:
 dynamic_reconfigure,${LOCALHOST},-l -t dynamic_reconfigure -w 7 -g services -L 2 -n:
+hlrc_demo_animation,${LOCALHOST},-l -t hlrc_demo_animation  -w 7 -g demo -L 9:
 
 icub_sim:
 icubsim,${LOCALHOST},-l -t icub_sim -x -w 10 -g icubsim -L 1:
