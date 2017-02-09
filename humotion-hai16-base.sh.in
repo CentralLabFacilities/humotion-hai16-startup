@@ -19,16 +19,11 @@ echo === init vdemo flobidev-HAI6-base components
 
 export VDEMO_components="
 roscore,${LOCALHOST},-l -t roscore -w 4 -g flobi -L 0:
-# xsc3,${LOCALHOST},-l -n -t xsc3_REAL -w 3 -g flobi -L 1:
 xsc3,${LOCALHOST},-l -t xsc3_VIRTUAL -v MODE=virtual -w 3 -g flobi -L 1:
 mary_server,${LOCALHOST},-l -t mary_server -w 5 -g flobi -L 1:
 mary_tts_provider,${LOCALHOST},-l -t mary_tts_provider -w 5 -g flobi -L 1:
-# xsc3_health_monitor,${LOCALHOST},-l -d -1 -t xsc3_health_monitor -w 5 -g flobi -L 2:
-# xsc3_control,${LOCALHOST},-n -l -t xsc3_control -w 3 -g flobi -L 2 -x:
 hlrc_server,${LOCALHOST},-l -t hlrc_server -w 5 -g flobi -L 2 -v BASE_SCOPE=/flobi -v SOUND_OUTPUT=pulse:
 flobisim,${LOCALHOST},-l -t flobi_sim -x -w 5 -g flobi -L 2:
 hlrc_testgui,${LOCALHOST},-l -L 4 -v BASE_SCOPE=/flobi -n -x:
-# load_urdf,${LOCALHOST},-l -t load_urdf -L 4 -n:
-# rviz,${LOCALHOST},-l -t rviz -L 6 -n -x:
 dynamic_reconfigure,${LOCALHOST},-l -t dynamic_reconfigure -w 7 -g services -L 2 -n:
 "
